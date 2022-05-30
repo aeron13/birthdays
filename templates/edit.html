@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<section class="section">
+    <div class="wrapper">
+        <h2>Edit a Birthday</h2>
+        {% for person in people %}
+        <!-- Create a form for users to submit a name, a month, and a day -->
+        <form method="post" action="/edit" id="edit">
+            <input type="hidden" name="id" value="{{ person.id }}">
+            <input type="text" name="name" value="{{ person.name }}" required >
+            <input type="number" name="month" placeholder="Month number" min="1" max="12" value="{{ person.month }}" required >
+            <input type="number" name="day" placeholder="Day number" min="1" max="31" value="{{ person.day }}" required >
+            <input type="submit" value="Edit" class="primary">
+        </form>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock %}

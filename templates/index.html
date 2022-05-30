@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<section class="section">
+    <div class="wrapper">
+        <h2>Add a Birthday</h2>
+        <!-- Create a form for users to submit a name, a month, and a day -->
+        <form method="post" action="/">
+            <input type="text" name="name" placeholder="Name" required >
+            <input type="number" name="month" placeholder="Month number" min="1" max="12" required >
+            <input type="number" name="day" placeholder="Day number" min="1" max="31" required >
+            <input type="submit" value="Save" class="primary">
+        </form>
+    </div>
+</section>
+<section class="section">
+    <div class="wrapper">
+        <h2>All Birthdays</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Birthday</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- TODO: Loop through the database entries to display them in this table -->
+                {% for person in people %}
+                <tr>
+                    <td> {{ person.name }} </td>
+                    <td> {{ person.month }}/{{ person.day }} </td>
+                    <td>
+                        <form method="get" action="/edit">
+                            <input type="hidden" name="id" value="{{ person.id }}">
+                            <input type="submit" value="Edit" class="secondary edit">
+                        </form>
+                        <form method="post" action="/delete">
+                            <input type="hidden" name="id" value="{{ person.id }}">
+                            <input type="submit" value="Delete" class="secondary delete">
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+
+{% endblock %}
